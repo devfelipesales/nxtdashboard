@@ -1,6 +1,7 @@
 import Form from '@/app/ui/invoices/edit-form';
 import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 import { fetchInvoiceById, fetchCustomers } from '@/app/lib/data';
+import { notFound } from 'next/navigation';
 
 export default async function EditInvoicePage({
   params,
@@ -13,7 +14,8 @@ export default async function EditInvoicePage({
     fetchCustomers(),
   ]);
 
-  if (!invoice) return null;
+  // Caso não seja criado o componente not-found.tsx, será renderizado o error.tsx com padrão.
+  if (!invoice) notFound();
 
   return (
     <main>
